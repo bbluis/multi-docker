@@ -21,3 +21,6 @@ after_success:
     - docker push luis/multi-nginx
     - docker push luis/multi-server
     - docker push luis/multi-worker
+
+on:
+    branch: master
