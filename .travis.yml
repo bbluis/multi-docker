@@ -4,23 +4,23 @@ services:
     - docker
 
 before_install:
-    - docker build -t luis/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t bigluis/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true luis/react-test npm test
+    - docker run -e CI=true bigluis/react-test npm test
 
 after_success:
-    - docker build -t luis/multi-client ./client
-    - docker build -t luis/multi-nginx ./nginx
-    - docker build -t luis/multi-server ./server
-    - docker build -t luis/multi-worker ./worker
+    - docker build -t bigluis/multi-client ./client
+    - docker build -t bigluis/multi-nginx ./nginx
+    - docker build -t bigluis/multi-server ./server
+    - docker build -t bigluis/multi-worker ./worker
 #Login to the docker client
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 #Take those images and push them to docker hub
-    - docker push luis/multi-client
-    - docker push luis/multi-nginx
-    - docker push luis/multi-server
-    - docker push luis/multi-worker
+    - docker push bigluis/multi-client
+    - docker push bigluis/multi-nginx
+    - docker push bigluis/multi-server
+    - docker push bigluis/multi-worker
 
 on:
     branch: master
